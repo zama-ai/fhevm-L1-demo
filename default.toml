@@ -2,10 +2,10 @@ tick_interval_secs = 1
 storage_path = "./temp/events.toml"
 
 [oracle]
-addresses = ["http://localhost:26657"]
+addresses = ["http://geth:26657"]
 
 [blockchain]
-addresses = ["http://localhost:9090"]
+addresses = ["http://kms-validator:9090"]
 contract = "wasm1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqr5j2ht"
 
 [blockchain.signkey]
@@ -18,7 +18,7 @@ denom = "ucosm"
 amount = 3000000
 
 [core]
-addresses = ["http://localhost:50051"]
+addresses = ["http://kms-core:50051"]
 
 [core.timeout_config]
 channel_timeout = 60
@@ -53,9 +53,15 @@ initial_wait_time = 0
 retry_interval = 0
 max_poll_count = 1
 
+[core.timeout_config.insecure_keygen]
+initial_wait_time = 1
+retry_interval = 3
+max_poll_count = 24
+
+
 [tracing]
 service_name = "kms-asc-connector"
-endpoint = "http://localhost:4317"
+endpoint = "http://connector:4317"
 
 [store]
-url = "http://localhost:8088"
+url = "http://gateway-store:8088"

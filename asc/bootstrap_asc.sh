@@ -44,7 +44,7 @@ deploy_contract() {
   $DEBUG && echo "TX_HASH: $TX_HASH"
 
   # Wait for the transaction to be included in a block
-  sleep 6
+  sleep 4
 
   $DEBUG && echo "Query the transaction result"
   # Query the transaction result
@@ -84,7 +84,7 @@ sed -i -re 's/^(timeout_commit =.*)$.*/timeout_commit = "500ms"/g' /root/.wasmd/
 # Start the KMS full node
 # /opt/run_wasmd.sh
 nohup /opt/run_wasmd.sh > /dev/null 2>&1 &
-sleep 5
+sleep 3
 
 # Add Connector account
 PUB_KEY_KMS_CONN='{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A/ZoCPf+L7Uxf3snWT+RU5+ivCmT8XR+NFpuhjm5cTP2"}'
@@ -123,7 +123,7 @@ upload_contract /app/asc.wasm
 
 # Instantiate smart contract - ethereum
 echo "sleep..."
-sleep 5
+sleep 3
 ETHEREUM_IPSC_CONTRACT_ADDRESS=$(deploy_contract $code_id_ethereum_ipsc "ethereum_ipsc" '{}')
 echo "ETHEREUM_IPSC_CONTRACT_ADDRESS:$ETHEREUM_IPSC_CONTRACT_ADDRESS"
 
@@ -136,7 +136,7 @@ fi
 INIT_MSG=$(printf '{"debug_proof": false, "verify_proof_contract_addr": "%s", "kms_core_conf": { "centralized": "default" }}' "$ETHEREUM_IPSC_CONTRACT_ADDRESS")
 
 echo $INIT_MSG
-sleep 5
+sleep 3
 ETHEREUM_ASC_CONTRACT_ADDRESS=$(deploy_contract $code_id_asc "ethereum-asc" "$INIT_MSG")
 echo "Ethereum ASC contract address: $ETHEREUM_ASC_CONTRACT_ADDRESS"
 

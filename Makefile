@@ -91,7 +91,7 @@ clone-coprocessor: $(WORKDIR)/
 	cd $(WORKDIR) && git clone https://github.com/zama-ai/fhevm-backend.git
 	cd $(COPROCESSOR_PATH) && git checkout $(COPROCESSOR_VERSION)
 
-run-coprocessor: $(WORKDIR)/ check-coprocessor generate-fhe-keys-registry-dev-image
+run-coprocessor: $(WORKDIR)/ check-coprocessor generate-fhe-keys-registry-dev-image prepare-common-network
 	cp -v network-fhe-keys/* $(COPROCESSOR_PATH)/fhevm-engine/fhevm-keys
 	cd $(COPROCESSOR_PATH)/fhevm-engine/coprocessor && make cleanup
 	cd $(COPROCESSOR_PATH)/fhevm-engine/coprocessor && cargo install sqlx-cli
@@ -122,6 +122,9 @@ endif
 check-all-test-repo: check-fhevm-solidity
 
 
+prepare-common-network:
+	@docker network inspect common-network >/dev/null 2>&1 || docker network create --driver bridge common-network
+
 generate-fhe-keys-registry-dev-image:
 ifeq ($(KEY_GEN),false)
 	@echo "KEY_GEN is false, executing corresponding commands..."
@@ -134,7 +137,7 @@ else
 endif
 
 
-run-full:
+run-full: prepare-common-network
 	$(MAKE) generate-fhe-keys-registry-dev-image
 ifeq ($(KEY_GEN),false)
 	@echo "KEY_GEN is false, executing corresponding commands..."
