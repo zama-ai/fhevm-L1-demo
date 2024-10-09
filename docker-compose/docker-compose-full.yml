@@ -71,7 +71,7 @@ services:
     ports:
       - "7077:7077"
     command: >
-      /bin/sh -c "sleep 30 && gateway"
+      /bin/sh -c "sleep 25 && gateway"
     volumes:
       - ../default.toml:/app/gateway/config/default.toml:Z
     environment:
