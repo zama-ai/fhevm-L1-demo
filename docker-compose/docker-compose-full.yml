@@ -20,6 +20,7 @@ services:
     entrypoint: [ "/app/bootstrap.sh" ]
     volumes:
       - ../asc/ethereum_ipsc.wasm:/app/ethereum_ipsc.wasm
+      - ../asc/asc.wasm:/app/asc.wasm
       - ../asc/bootstrap_asc.sh:/app/bootstrap.sh
     healthcheck:
       test: "wget -Sq --spider http://localhost:26657/status"
