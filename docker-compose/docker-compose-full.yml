@@ -2,7 +2,7 @@ name: zama-dev
 
 services:
   gateway-store:
-    image: ghcr.io/zama-ai/kms-blockchain-gateway-dev:v0.9.0-rc13
+    image: ghcr.io/zama-ai/kms-blockchain-gateway-dev:v0.9.0-rc15
     command:
       - "kv_store"
     ports:
@@ -11,7 +11,7 @@ services:
       - common-network
 
   kms-validator:
-    image: ghcr.io/zama-ai/kms-blockchain-asc-dev:v0.9.0-rc13
+    image: ghcr.io/zama-ai/kms-blockchain-asc-dev:v0.9.0-rc15
     ports:
       - "36656:26656"
       - "36657:26657"
@@ -31,7 +31,7 @@ services:
       - common-network
 
   connector:
-    image: ghcr.io/zama-ai/kms-blockchain-connector-dev:v0.9.0-rc13
+    image: ghcr.io/zama-ai/kms-blockchain-connector-dev:v0.9.0-rc15
     command:
       - "kms-blockchain-connector"
     environment:
@@ -52,7 +52,7 @@ services:
       - common-network
 
   kms-core:
-    image: ghcr.io/zama-ai/kms-service-dev:v0.9.0-rc13
+    image: ghcr.io/zama-ai/kms-service-dev:v0.9.0-rc15
     volumes:
       - $PWD/res/keys:/app/kms/core/service/keys:Z
     ports:
@@ -67,7 +67,7 @@ services:
       - common-network
 
   gateway:
-    image: ghcr.io/zama-ai/kms-blockchain-gateway-dev:v0.9.0-rc13
+    image: ghcr.io/zama-ai/kms-blockchain-gateway-dev:v0.9.0-rc15
     ports:
       - "7077:7077"
     command: >
@@ -82,7 +82,7 @@ services:
       - GATEWAY__ETHEREUM__FHE_LIB_ADDRESS=000000000000000000000000000000000000005d
       - GATEWAY__ETHEREUM__ORACLE_PREDEPLOY_ADDRESS=096b4679d45fB675d4e2c1E4565009Cec99A12B1
       - GATEWAY__ETHEREUM__ACL_ADDRESS=05fD9B5EFE0a996095f42Ed7e77c390810CF660c
-      - GATEWAY__ETHEREUM__COPROCESSOR_API_KEY=api-key
+      - GATEWAY__ETHEREUM__COPROCESSOR_API_KEY=a1503fb6-d79b-4e9e-826d-44cf262f3e05
       - GATEWAY__ETHEREUM__COPROCESSOR_URL=http://coproc:50052
       - GATEWAY__ETHEREUM__CONTRACT_ADDRESS=wasm1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqr5j2ht
       - GATEWAY__KMS__CONTRACT_ADDRESS=wasm1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqr5j2ht
